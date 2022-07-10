@@ -10,7 +10,7 @@ import com.example.pokedex.R
 import com.example.pokedex.domain.Pokemon
 
 class PokemonAdapter(
-    private val items: List<Pokemon>
+    private val items: List<Pokemon?>
 ) : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -28,7 +28,7 @@ class PokemonAdapter(
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        fun bindView(item: Pokemon) = with(itemView){
+        fun bindView(item: Pokemon?) = with(itemView){
             val ivPokemon = findViewById<ImageView>(R.id.ivPokemon)
             val tvNumber = findViewById<TextView>(R.id.tvNumber)
             val tvName = findViewById<TextView>(R.id.tvName)
@@ -36,7 +36,7 @@ class PokemonAdapter(
             val tvType2 = findViewById<TextView>(R.id.tvType2)
 
             // TODO:load image with Glide
-
+        item?.let {
 
             tvNumber.text = "Nº ${item.formattedNumber}"
             tvName.text = item.name
@@ -48,5 +48,7 @@ class PokemonAdapter(
                 tvType2.visibility = View.GONE
             }
         }
-    }
+
+        }
+        }
 }
